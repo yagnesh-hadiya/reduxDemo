@@ -2,13 +2,18 @@ import { AppRegistry } from 'react-native';
 import App from './App';
 import { name as appName } from './app.json';
 import allReducers from './src/redux/reducer';
-import { createStore } from 'redux';
+import { createStore ,applyMiddleware} from 'redux';
 import { Provider } from 'react-redux';
+import React from 'react';
+import reduxThunk from 'redux-thunk';
 
-const store = createStore(allReducers);
+const store = createStore(allReducers,applyMiddleware(reduxThunk));
 
-AppRegistry.registerComponent(appName, () =>
-    <Provider store={store}>
-        <App />
-    </Provider>
-);
+const demo = () => {
+    return (
+        <Provider store={store}>
+            <App />
+        </Provider>
+    )
+};
+AppRegistry.registerComponent(appName, () => demo);

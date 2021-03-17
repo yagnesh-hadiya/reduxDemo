@@ -1,13 +1,15 @@
-import { INCREMENT, DECREMENT, RESET, APIDATA } from '../constant';
+import { INCREMENT, DECREMENT, APIDATA } from '../constant';
 import Axios from 'axios';
-export const increment = () => {
-    return {
-        type: INCREMENT
+export const increment = (cnt) => {
+    return  {
+        type: INCREMENT,
+        payload:cnt
     }
 }
-export const decrement = () => {
+export const decrement = (cnt) => {
     return {
-        type: DECREMENT
+        type: DECREMENT,
+        payload:cnt
     }
 }
 
@@ -15,7 +17,6 @@ export const apiData = () => async (dispatch) => {
     console.log('apidata call=')
     const response = await Axios.get('https://reactnative.dev/movies.json')
         .catch((e) => console.error(e))
-    // console.log('====',response);
     return dispatch({
         type: APIDATA,
         payload: response.data
